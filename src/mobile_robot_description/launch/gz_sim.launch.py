@@ -24,7 +24,7 @@ def generate_launch_description():
             get_package_share_path('ros_gz_sim'),
             'launch',
             'gz_sim.launch.py')),
-        launch_arguments={'gz_args': world_path}.items()
+        launch_arguments={'gz_args': world_path, 'use_sim_time': 'true'}.items()
     )
     
     
@@ -32,28 +32,24 @@ def generate_launch_description():
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        parameters=[{"robot_description": robot_description}]
+        parameters=[{"robot_description": robot_description , 
+                     "use_sim_time": True}]
     )
     
     joint_state_publisher_node = Node(
         package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui'
+        executable='joint_state_publisher_gui',
+        parameters=[{"use_sim_time": True}]
     )
     
     rviz_node = Node(
         package= 'rviz2',
         executable= 'rviz2',
-        arguments=['-d',rviz_config_path]
+        arguments=['-d',rviz_config_path],
+        parameters=[{"use_sim_time": True}]
     )
     
-    gazebo_bridge_node = Node(
-        package = 'ros_gz_bridge',
-        executable = 'parameter_bridge',
-        parameters=[{
-            'config_file': bridge_config_path
-        }]
-    )
-    
+        
     spawn_entity_node = Node(
         package='ros_gz_sim',
         executable='create',
@@ -64,14 +60,24 @@ def generate_launch_description():
             "-y", "0.0",
             "-z", "0.0"
         ],
-        output='screen'
+        output='screen',
+        parameters=[{"use_sim_time": True}]
+    )
+    
+    gazebo_bridge_node = Node(
+        package = 'ros_gz_bridge',
+        executable = 'parameter_bridge',
+        parameters=[{
+            'config_file': bridge_config_path, 
+            'use_sim_time': True
+        }]
     )
     
     return LaunchDescription([
         gz_launch_path,
+        spawn_entity_node,
         robot_state_publisher_node,
         joint_state_publisher_node,
-        rviz_node,
         gazebo_bridge_node,
-        spawn_entity_node,
+        rviz_node,
     ])

@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <gazebo>
+      <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+          <joint_name>left_wheel_joint</joint_name>
+          <joint_name>right_wheel_joint</joint_name>
+      </plugin>
+  </gazebo>
 
   <gazebo reference="caster_wheel">
         <mu1 value="0.1"/>
@@ -9,21 +15,18 @@
 
   <gazebo>
       <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
-          <left_joint>base_wheel_joint_1</left_joint>
-          <right_joint>base_wheel_joint_2</right_joint>
+          <left_joint>left_wheel_joint</left_joint>
+          <right_joint>right_wheel_joint</right_joint>
           <wheel_separation>0.425</wheel_separation>
           <wheel_radius>0.1</wheel_radius>
+          <topic>/cmd_vel</topic>
           <frame_id>odom</frame_id>
           <child_frame_id>base_footprint</child_frame_id>
+          <publish_tf>true</publish_tf>
+          <odom_topic>/odom</odom_topic>
       </plugin>
   </gazebo>
 
-  <gazebo>
-      <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
-          <joint_name>base_wheel_joint_1</joint_name>
-          <joint_name>base_wheel_joint_2</joint_name>
-      </plugin>
-  </gazebo>
 
 
   <gazebo>
