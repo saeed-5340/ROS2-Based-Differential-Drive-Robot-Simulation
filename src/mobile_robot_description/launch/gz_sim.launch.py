@@ -36,11 +36,11 @@ def generate_launch_description():
                      "use_sim_time": True}]
     )
     
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        parameters=[{"use_sim_time": True}]
-    )
+    # joint_state_publisher_node = Node(
+    #     package='joint_state_publisher_gui',
+    #     executable='joint_state_publisher_gui',
+    #     parameters=[{"use_sim_time": True}]
+    # )
     
     rviz_node = Node(
         package= 'rviz2',
@@ -77,7 +77,7 @@ def generate_launch_description():
         gz_launch_path,
         spawn_entity_node,
         robot_state_publisher_node,
-        joint_state_publisher_node,
+        # joint_state_publisher_node,
         gazebo_bridge_node,
-        rviz_node,
+        # rviz_node,
     ])
