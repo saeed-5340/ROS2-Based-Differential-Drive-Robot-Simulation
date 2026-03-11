@@ -79,5 +79,5 @@ def generate_launch_description():
         robot_state_publisher_node,
         # joint_state_publisher_node,
         gazebo_bridge_node,
-        # rviz_node,
+        rviz_node,
     ])
