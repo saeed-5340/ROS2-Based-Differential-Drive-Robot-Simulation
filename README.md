@@ -1,5 +1,5 @@
 # ROS2-Based-Differential-Drive-Robot-Simulation
-<p style="color:red;"><b>Note: All code is available in the branch <code>deployment/beta</code>.</b></p>
+<!-- <p style="color:red;"><b>Note: All code is available in the branch <code>deployment/beta</code>.</b></p> -->
 
 This repository contains a **complete simulation pipeline for a differential drive mobile robot** using **ROS 2 and Gazebo**.  
 The project demonstrates how to build a robot **from scratch**, simulate it in Gazebo, perform **mapping with SLAM**, and achieve **autonomous navigation using Nav2**.
